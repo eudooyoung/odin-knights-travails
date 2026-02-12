@@ -41,5 +41,5 @@ v) Implement knightMoves function that does following:
   - ii) If current key matches end key, assign current path to result and break the loop
   - iii) If not, add current key to visited set
   - iv) Get current key's neighbors from graph
-  - v) Traversing neighbors, push next state { key: neighbor, path: [...currentPath, neighbor] } only if the neighbor hasn't been visited
+  - v) Traversing neighbors, push next state { key: neighbor, path: [...currentPath, neighbor] } into the queue only if the neighbor hasn't been visited
 - vi) Return result path
