@@ -76,9 +76,9 @@ export const buildGraph = () => {
   for (let x = 0; x < 8; x++) {
     for (let y = 0; y < 8; y++) {
       const vertex = [x, y];
-      const next = neighbors(vertex);
+      const neighbors = neighbors(vertex);
       const key = JSON.stringify(vertex);
-      graph.set(key, next);
+      graph.set(key, neighbors);
     }
   }
   return graph;
