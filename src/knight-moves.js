@@ -3,21 +3,18 @@ const knightMoves = (start, end) => {
   const visited = new Set();
   const queue = [];
   let head = 0;
-  let depth = 0;
   let path = [];
   const startStr = JSON.stringify(start);
   const endStr = JSON.stringify(end);
 
-  queue.push({ key: startStr, depth: 0, path: [startStr] });
+  queue.push({ key: startStr, path: [startStr] });
 
   while (head < queue.length) {
     const current = queue[head++];
     const currentKey = current.key;
-    const currentDepth = current.depth;
     const currentPath = current.path;
     // base case
     if (currentKey === endStr) {
-      depth = currentDepth;
       path = currentPath;
       break;
     }
@@ -26,11 +23,7 @@ const knightMoves = (start, end) => {
     const neighbors = graph.get(currentKey);
     for (let neighbor of neighbors) {
       if (!visited.has(neighbor)) {
-        queue.push({
-          key: neighbor,
-          depth: currentDepth + 1,
-          path: currentPath.concat([neighbor]),
-        });
+        queue.push({ key: neighbor, path: currentPath.concat(neighbor) });
       }
     }
   }
