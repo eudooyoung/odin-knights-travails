@@ -23,7 +23,7 @@ const knightMoves = (start, end) => {
     const neighbors = graph.get(currentKey);
     for (let neighbor of neighbors) {
       if (!visited.has(neighbor)) {
-        queue.push({ key: neighbor, path: currentPath.concat(neighbor) });
+        queue.push({ key: neighbor, path: [...currentPath, neighbor] });
       }
     }
   }
@@ -31,7 +31,7 @@ const knightMoves = (start, end) => {
   return path;
 };
 
-export const nextVertices = (current) => {
+export const neighbors = (current) => {
   const currentX = current[0];
   const currentY = current[1];
   const deltas = delta(currentX, currentY);
@@ -76,7 +76,7 @@ export const buildGraph = () => {
   for (let x = 0; x < 8; x++) {
     for (let y = 0; y < 8; y++) {
       const vertex = [x, y];
-      const next = nextVertices(vertex);
+      const next = neighbors(vertex);
       const key = JSON.stringify(vertex);
       graph.set(key, next);
     }
