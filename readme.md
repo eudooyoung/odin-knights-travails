@@ -37,7 +37,7 @@ v) Implement knightMoves function that does following:
 - iii) Convert argument vertices to keys in string
 - iv) Create an array that will act as a queue and push initial state: { key: start key, path: [start key] } into it
 - v) Create a loop that is run while queue is not empty and does following:
-  - i) Put out current state
+  - i) Dequeue one item from the queue and assigin current key & path with it: currentKey = current.key currentPath = current.path
   - ii) If current key matches end key, assign current path to result and break the loop
   - iii) If not, add current key to visited set
   - iv) Get current key's neighbors from graph
