@@ -4,17 +4,17 @@ const knightMoves = (start, end) => {
   const queue = [];
   let head = 0;
   let path = [];
-  const startStr = JSON.stringify(start);
-  const endStr = JSON.stringify(end);
+  const startKey = JSON.stringify(start);
+  const endKey = JSON.stringify(end);
 
-  queue.push({ key: startStr, path: [startStr] });
+  queue.push({ key: startKey, path: [startKey] });
 
   while (head < queue.length) {
     const current = queue[head++];
     const currentKey = current.key;
     const currentPath = current.path;
     // base case
-    if (currentKey === endStr) {
+    if (currentKey === endKey) {
       path = currentPath;
       break;
     }
@@ -76,8 +76,8 @@ export const buildGraph = () => {
   for (let x = 0; x < 8; x++) {
     for (let y = 0; y < 8; y++) {
       const vertex = [x, y];
-      const key = JSON.stringify(vertex);
       const next = nextVertices(vertex);
+      const key = JSON.stringify(vertex);
       graph.set(key, next);
     }
   }
