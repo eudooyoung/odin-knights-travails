@@ -1,4 +1,4 @@
-const knightMovesBFS = (start, end) => {
+const knightMoves = (start, end) => {
   const graph = buildGraph();
   const visited = new Set();
   const queue = [];
@@ -8,27 +8,26 @@ const knightMovesBFS = (start, end) => {
   const startStr = JSON.stringify(start);
   const endStr = JSON.stringify(end);
 
-  visited.add(startStr);
-  queue.push({ vertex: startStr, depth: 0, path: [startStr] });
+  queue.push({ key: startStr, depth: 0, path: [startStr] });
 
   while (head < queue.length) {
     const current = queue[head++];
-    const currentVertex = current.vertex;
+    const currentKey = current.key;
     const currentDepth = current.depth;
     const currentPath = current.path;
     // base case
-    if (currentVertex === endStr) {
+    if (currentKey === endStr) {
       depth = currentDepth;
       path = currentPath;
       break;
     }
 
-    const neighbors = graph.get(currentVertex);
+    visited.add(currentKey);
+    const neighbors = graph.get(currentKey);
     for (let neighbor of neighbors) {
       if (!visited.has(neighbor)) {
-        visited.add(neighbor);
         queue.push({
-          vertex: neighbor,
+          key: neighbor,
           depth: currentDepth + 1,
           path: currentPath.concat([neighbor]),
         });
@@ -36,12 +35,12 @@ const knightMovesBFS = (start, end) => {
     }
   }
 
-  return { depth, path };
+  return path;
 };
 
 export const nextVertices = (current) => {
-  let currentX = current[0];
-  let currentY = current[1];
+  const currentX = current[0];
+  const currentY = current[1];
   const deltas = delta(currentX, currentY);
   const next = [];
   for (let delta of deltas) {
@@ -92,8 +91,8 @@ export const buildGraph = () => {
   return graph;
 };
 
-const resultBFS = knightMovesBFS([0, 0], [7, 7]);
-console.log(`It takes ${resultBFS.depth} moves as follows:`);
-resultBFS.path.forEach((path) => {
-  console.log(path);
+const path = knightMoves([3, 3], [0, 0]);
+console.log(`It takes ${path.length - 1} moves as follows:`);
+path.forEach((vertex) => {
+  console.log(vertex);
 });
